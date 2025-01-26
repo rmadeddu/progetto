@@ -32,9 +32,9 @@ def elaborazione():
         connessioneDB = mysql.connector.connect(
                 host="rmadeddu.mysql.pythonanywhere-services.com",
                 port=3306,
-                database="rmadeddu$db",
-                user="rmadeddu",
-                password="PWPegaso25!")
+                database="",
+                user="",
+                password="")
 
         # Imposta il Cursor
         cur = connessioneDB.cursor()
