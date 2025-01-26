@@ -30,7 +30,7 @@ def elaborazione():
 
         # Configurazione per la connessione al database
         connessioneDB = mysql.connector.connect(
-                host="rmadeddu.mysql.pythonanywhere-services.com",
+                host="",
                 port=3306,
                 database="",
                 user="",
