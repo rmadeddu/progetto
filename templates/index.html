@@ -23,9 +23,9 @@
 
     <div class="container-md">
 
-        {% if Utenti %} <!-- Verifico la presenza dei dati generati -->
+        {% if DomandeDEP %} <!-- Verifico la presenza dei dati generati -->
 
-        <h4><span class="badge text-bg-info">1</span>&nbsp;&nbsp;ELENCO DEGLI UTENTI GENERATI CASUALMENTE</h4>
+        <h4><span class="badge text-bg-info">1</span>&nbsp;&nbsp;ELENCO DEI DATI GENERATI CASUALMENTE</h4>
 
         <br><br>
 
@@ -33,48 +33,53 @@
             <table class="table table-striped table-hover table-bordered align-middle">
               <thead>
                 <tr>
-                 <th scope="col">ID</th>
-                 <th scope="col">NOME</th>
-                 <th scope="col">COGNOME</th>
-                 <th scope="col" class="text-center">GENERE</th>
-                 <th scope="col">EMAIL</th>
-                 <th scope="col">TELEFONO</th>
+                 <th scope="col">ID domanda</th>
+                 <th scope="col">Punteggio valutazioni personali</th>
+                 <th scope="col">Punteggio esperienza professionale</th>
+                 <th scope="col">Punteggio capacità professionali e culturali</th>
+                 <th scope="col">Punteggio totale</th>
+                 <th scope="col">Attribuzione DEP</th>
+                 <th scope="col">Matricola</th>
+                 <th scope="col">Nome</th>
+                 <th scope="col">Cognome</th>
+                 <th scope="col" class="text-center">Genere</th>
+                 <th scope="col">Email</th>
+                 <th scope="col">Telefono</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
-               {%  for Utenti in Utenti %}
+               {%  for DomandeDEP in DomandeDEP %}
                 <tr>
-                 <td>{{ Utenti.ID }}</td>
-                 <td>{{ Utenti.nome }}</td>
-                 <td>{{ Utenti.cognome }}</td>
-                 <td class="text-center">{{ Utenti.genere }}</td>
-                 <td>{{ Utenti.email }}</td>
-                 <td>{{ Utenti.telefono }}</td>
+                 <td>{{ DomandeDEP.ID_domanda }}</td>
+                 <td class="text-center">{{ DomandeDEP.puntiValPers }}</td>
+                 <td class="text-center">{{ DomandeDEP.puntiEspProf }}</td>
+                 <td class="text-center">{{ DomandeDEP.puntiCapProfCult }}</td>
+                 <td class="text-center">{{ DomandeDEP.punteggioTot }}</td>
+                 <td class="text-center">{{ DomandeDEP.attrDEP }}</td>
+                 <td>{{ DomandeDEP.matricola }}</td>
+                 <td>{{ DomandeDEP.nome }}</td>
+                 <td>{{ DomandeDEP.cognome }}</td>
+                 <td class="text-center">{{ DomandeDEP.genere }}</td>
+                 <td>{{ DomandeDEP.email }}</td>
+                 <td>{{ DomandeDEP.telefono }}</td>
                 </tr>
                {% endfor %}
               </tbody>
             </table>
         </div>
 
-
-
     <br><br>
 
-    <h4><span class="badge text-bg-info">2</span>&nbsp;&nbsp;CREAZIONE DEL FOGLIO DI LAVORO EXCEL CON I DATI DEGLI UTENTI</h4>
+    <h4><span class="badge text-bg-info">2</span>&nbsp;&nbsp;CREAZIONE DEL FOGLIO DI LAVORO EXCEL</h4>
 
-    <br>
-    <a class="btn btn-primary" href="{{ percorso_xls }}" role="button">Scarica l'elenco in formato Excel</a>
-
+    <br><a class="btn btn-primary" href="{{ percorso_xls }}" role="button">Scarica l'elenco in formato Excel</a>
     <br><br><br>
-
-    <h4><span class="badge text-bg-info">3</span>&nbsp;&nbsp;LETTURA DEL FILE EXCEL E GENERAZIONE DEI COMANDI SQL PER LA CREAZIONE E LA POPOLAZIONE DELLA TABELLA SQL 'Utenti'</h4>
-
+    <h4><span class="badge text-bg-info">3</span>&nbsp;&nbsp;LETTURA DEL FILE EXCEL E GENERAZIONE DEI COMANDI SQL PER LA CREAZIONE E LA POPOLAZIONE DELLA TABELLA SQL 'DomandeDEP'</h4>
     <br><br>
-
 
         <div class="card">
             <div class="card-header">
-                Crea la tabella 'Utenti'
+                Crea la tabella 'DomandeDEP'
             </div>
             <code id="creatabellaSQL">{{ sql_tabella }}</code>
             <button class="btn btn-sm btn-outline-primary creatabellaSQL" style="width: 150px" onclick="copiacodice('creatabellaSQL')">
@@ -82,13 +87,11 @@
             </button>
         </div>
 
-
         <br><br>
-
 
         <div class="card">
              <div class="card-header">
-                Popola la tabella 'Utenti'
+                Popola la tabella 'DomandeDEP'
             </div>
             <code id="popolatabellaSQL">{{ sql_popola_tabella }}</code>
             <button class="btn btn-sm btn-outline-primary popolatabellaSQL" style="width: 150px" onclick="copiacodice('popolatabellaSQL')">
@@ -110,11 +113,9 @@
         <li class="list-group-item">Utilizzare un altro script Python per leggere i dati dal file Excel e creare una tabella SQL con gli stessi dati utilizzando il linguaggio SQL.</li>
     </ol>
 
-
     {% endif %}
 
     </div>
-
 
         <script>
         function copiacodice(c) {
